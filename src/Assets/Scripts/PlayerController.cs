@@ -33,6 +33,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 headRange = new Vector2(-90f, 45f);
     private float headRotation = 0f;
 
+    [Header("Interaction")]
+    public Transform interationLimitTransform;
+    
+    [HideInInspector]
+    public PickableInteractable pickedObject = null;
+
 
     private Rigidbody _rigidbody;
 
@@ -53,6 +59,7 @@ public class PlayerController : MonoBehaviour
     void Update() {
         Jump();
         MoveHead();
+        HandleInteraction();
     }
     
     void FixedUpdate()
@@ -116,6 +123,30 @@ public class PlayerController : MonoBehaviour
         headRotation = Mathf.Clamp(headRotation + viewRotation.y, headRange.x, headRange.y);
 
         headTransform.localEulerAngles = new(headRotation, 0f, 0f);
+
+    }
+
+    private void HandleInteraction() {
+
+        if(pickedObject != null) {
+            pickedObject.transform.SetPositionAndRotation(interationLimitTransform.position, interationLimitTransform.rotation);
+        }
+
+        if(Input.GetKeyDown(KeyCode.E)) {
+            if(pickedObject != null) {
+                pickedObject = null;
+                Debug.Log("Dropped");
+                return;
+            }
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+            RaycastHit hit;
+            Vector3 rayDirection = interationLimitTransform.position - headTransform.position;
+            if(Physics.Raycast(ray, out hit, rayDirection.magnitude) && hit.transform.tag == "Interactable") {
+                hit.transform.GetComponent<Interactable>().OnInteract();    
+            }
+        }
+
+
 
     }
 }
