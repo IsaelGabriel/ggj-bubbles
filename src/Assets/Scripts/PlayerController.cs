@@ -129,13 +129,13 @@ public class PlayerController : MonoBehaviour
     private void HandleInteraction() {
 
         if(pickedObject != null) {
-            pickedObject.transform.SetPositionAndRotation(interationLimitTransform.position, interationLimitTransform.rotation);
+            
+            pickedObject.transform.position = interationLimitTransform.position;
         }
 
         if(Input.GetKeyDown(KeyCode.E)) {
             if(pickedObject != null) {
                 pickedObject = null;
-                Debug.Log("Dropped");
                 return;
             }
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
