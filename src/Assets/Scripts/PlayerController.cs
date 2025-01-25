@@ -127,14 +127,15 @@ public class PlayerController : MonoBehaviour
     }
 
     private void HandleInteraction() {
-
+        Vector3 pickedObjectVelocity = Vector3.zero;
         if(pickedObject != null) {
-            
+            pickedObjectVelocity = interationLimitTransform.position - pickedObject.transform.position;
             pickedObject.transform.position = interationLimitTransform.position;
         }
 
         if(Input.GetKeyDown(KeyCode.E)) {
             if(pickedObject != null) {
+                pickedObject.GetComponent<Rigidbody>().AddForce(pickedObjectVelocity * 100f, ForceMode.Impulse);
                 pickedObject = null;
                 return;
             }
