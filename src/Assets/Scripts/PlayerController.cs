@@ -131,6 +131,15 @@ public class PlayerController : MonoBehaviour
         if(pickedObject != null) {
             pickedObjectVelocity = interationLimitTransform.position - pickedObject.transform.position;
             pickedObject.transform.position = interationLimitTransform.position;
+
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+            RaycastHit hit;
+            Vector3 rayDirection = interationLimitTransform.position - headTransform.position;
+            if(Physics.Raycast(ray, out hit, rayDirection.magnitude) && hit.transform.tag == "Interactable") {
+                if(hit.transform != pickedObject.transform) {
+                    pickedObject = null;
+                }
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.E)) {
