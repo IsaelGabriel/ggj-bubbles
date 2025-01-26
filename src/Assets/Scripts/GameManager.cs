@@ -21,11 +21,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update() {
+        if(Input.GetKey(KeyCode.Escape)) {
+            Quit();
+        }
+    }
+
     public static void NextLevel() {
         instance.currentLevel++;
         if(instance.currentLevel < instance.levelManagerProfile.levels.Count) {
             SceneManager.LoadScene(instance.levelManagerProfile.levels[instance.currentLevel].sceneName);
         }
 
+    }
+
+    public static void FirstLevel() {
+        instance.currentLevel = 0;
+        if(instance.currentLevel < instance.levelManagerProfile.levels.Count) {
+            SceneManager.LoadScene(instance.levelManagerProfile.levels[instance.currentLevel].sceneName);
+        }
+    }
+
+    public static void Quit() {
+        Application.Quit();
     }
 }
