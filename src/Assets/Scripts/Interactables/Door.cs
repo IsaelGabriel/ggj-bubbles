@@ -6,11 +6,6 @@ public class Door : Interactable
 {
     private Animator animator;
 
-    [SerializeField]
-    private float _animationDuration = 1f;
-    private float _animationDurationCount = 1f;
-
-
     private bool isOpen = false;
     
     [Header("Door Settings")]
@@ -27,7 +22,6 @@ public class Door : Interactable
         {
             Debug.LogWarning("No animator attached to this door! Object name: " + gameObject.name);
         }
-        _animationDurationCount = _animationDuration;
     }
 
     private void Update()
