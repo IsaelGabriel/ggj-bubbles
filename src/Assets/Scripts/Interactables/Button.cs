@@ -26,13 +26,11 @@ public class Button : Interactable, Signal
 
     public void ActivateButton()
     {
-        if (Activated) return;
-
         _isPressed = true;
         deactivationTime = Time.time + activationDuration;
         if (animator != null)
         {
-            animator.SetTrigger("button");
+            animator.SetTrigger("Button");
         }
     }
 

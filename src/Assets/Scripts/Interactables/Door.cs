@@ -12,7 +12,7 @@ public class Door : Interactable
     public bool debugMode = false;
 
     [Header("Door Inputs")]
-    public List<Signal> doorInputs;
+    public List<Transform> doorInputs;
     
     private void Start()
     {
@@ -59,9 +59,12 @@ public class Door : Interactable
 
     private bool AreAllInputsActive()
     {
-        foreach (Signal doorInput in doorInputs)
+        foreach (Transform doorInput in doorInputs)
         {
-            if (!doorInput.Activated)
+            Signal input = doorInput.GetComponent<Signal>();
+            if(input == null) continue;
+
+            if (!input.Activated)
             {
                 return false;
             }
@@ -72,12 +75,12 @@ public class Door : Interactable
     public void OpenDoor()
     {
         isOpen = true;
-        animator.Play("door open");
+        animator.Play("Door Open");
     }
 
     public void CloseDoor()
     {
         isOpen = false;
-        animator.Play("door close");
+        animator.Play("Door Close");
     }
 }
