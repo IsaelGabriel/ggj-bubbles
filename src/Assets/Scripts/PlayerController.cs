@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
         pickable.drag = 10f;
         pickable.constraints = RigidbodyConstraints.FreezeRotation;
 
-        pickable.transform.parent = interactionLimitTransform;
+        //pickable.transform.parent = interactionLimitTransform;
 
         pickedObject = pickable;
     }
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
         pickedObject.drag = 1f;
         pickedObject.constraints = RigidbodyConstraints.None;
 
-        pickedObject.transform.parent = null;
+        //pickedObject.transform.parent = null;
         pickedObject = null;
     }
 
