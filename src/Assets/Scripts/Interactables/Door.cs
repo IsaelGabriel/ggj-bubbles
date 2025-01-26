@@ -12,7 +12,7 @@ public class Door : Interactable
     public bool debugMode = false;
 
     [Header("Door Inputs")]
-    public List<DoorInput> doorInputs;
+    public List<Signal> doorInputs;
     
     private void Start()
     {
@@ -47,7 +47,6 @@ public class Door : Interactable
             return;
         }
 
-        Debug.Log("door interacted");
         if (isOpen)
         {
             CloseDoor();
@@ -60,9 +59,9 @@ public class Door : Interactable
 
     private bool AreAllInputsActive()
     {
-        foreach (DoorInput doorInput in doorInputs)
+        foreach (Signal doorInput in doorInputs)
         {
-            if (!doorInput.IsActivated())
+            if (!doorInput.Activated)
             {
                 return false;
             }
@@ -73,14 +72,12 @@ public class Door : Interactable
     public void OpenDoor()
     {
         isOpen = true;
-        Debug.Log("open da noor");
         animator.Play("door open");
     }
 
     public void CloseDoor()
     {
         isOpen = false;
-        Debug.Log("close da noor");
         animator.Play("door close");
     }
 }
