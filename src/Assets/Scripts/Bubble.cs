@@ -12,7 +12,7 @@ public class Bubble : MonoBehaviour
             Vector3 forceDirection = contact - transform.position;
             
             collision.gameObject.GetComponent<Rigidbody>().AddForceAtPosition(force * forceDirection, contact, ForceMode.Impulse);
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

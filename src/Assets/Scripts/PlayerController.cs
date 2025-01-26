@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             Vector3 rayDirection = interationLimitTransform.position - headTransform.position;
             if(Physics.Raycast(ray, out hit, rayDirection.magnitude) && hit.transform.tag == "Interactable") {
-                hit.transform.GetComponent<Interactable>().OnInteract();    
+                hit.transform.GetComponentInParent<Interactable>().OnInteract();
             }
         }
 
