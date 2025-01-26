@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
             }
             Vector3 newVelocity = currentVelocity + input * _acceleration * Time.deltaTime;
             if(Math.Abs(newVelocity.x) < Math.Abs(currentVelocity.x)) currentVelocity.x = newVelocity.x;
-            if(Math.Abs(newVelocity.y) < Math.Abs(currentVelocity.y)) currentVelocity.y = newVelocity.y;
+            if(Math.Abs(newVelocity.z) < Math.Abs(currentVelocity.z)) currentVelocity.z = newVelocity.z;
 
         }
 
