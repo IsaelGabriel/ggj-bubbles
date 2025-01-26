@@ -47,5 +47,10 @@ public class GameManager : MonoBehaviour
 
     public static void Quit() {
         Application.Quit();
-     }
+    }
+
+    static void ResetLevel() {
+        if(!Input.GetKeyUp(KeyCode.R)) return;
+        SceneManager.LoadScene(instance.levelManagerProfile.levels[instance.currentLevel].sceneName);
+    }
 }

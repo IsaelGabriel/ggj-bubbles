@@ -223,7 +223,7 @@ MonoBehaviour:
   _maxVelocity: 7
   _jumpForce: 300
   bottom: {fileID: 5661876381004952695}
-  mouseSensitivity: 50
+  mouseSensitivity: 500
   headTransform: {fileID: 4827326520526861872}
   headRange: {x: -90, y: 90}
   interactionLimitTransform: {fileID: 2113890823179637883}
