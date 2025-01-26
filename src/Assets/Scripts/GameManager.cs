@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,11 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
+        ResetLevel();
         if(Input.GetKey(KeyCode.Escape)) {
             Quit();
         }
+        
     }
 
     public static void NextLevel() {
@@ -38,11 +41,11 @@ public class GameManager : MonoBehaviour
     public static void FirstLevel() {
         instance.currentLevel = 0;
         if(instance.currentLevel < instance.levelManagerProfile.levels.Count) {
-            SceneManager.LoadScene(instance.levelManagerProfile.levels[instance.currentLevel].sceneName);
+            SceneManager.LoadScene(instance.levelManagerProfile.levels[0].sceneName);
         }
     }
 
     public static void Quit() {
         Application.Quit();
-    }
+     }
 }
