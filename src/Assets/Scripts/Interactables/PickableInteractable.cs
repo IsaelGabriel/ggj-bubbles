@@ -7,7 +7,7 @@ public class PickableInteractable : Interactable
 
     public override void OnInteract()
     {
-        FindObjectOfType<PlayerController>().pickedObject = this;
+        FindObjectOfType<PlayerController>().PickupObject(GetComponent<Rigidbody>());
     }
 
 

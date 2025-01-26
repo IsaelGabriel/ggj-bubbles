@@ -34,10 +34,13 @@ public class PlayerController : MonoBehaviour
     private float headRotation = 0f;
 
     [Header("Interaction")]
-    public Transform interationLimitTransform;
+    public Transform interactionLimitTransform;
     
     [HideInInspector]
-    public PickableInteractable pickedObject = null;
+    public Rigidbody pickedObject = null;
+    
+    [SerializeField]
+    private float pickupForce = 150f;
 
 
     private Rigidbody _rigidbody;
@@ -129,34 +132,47 @@ public class PlayerController : MonoBehaviour
     private void HandleInteraction() {
         Vector3 pickedObjectVelocity = Vector3.zero;
         if(pickedObject != null) {
-            pickedObjectVelocity = interationLimitTransform.position - pickedObject.transform.position;
-            pickedObject.transform.position = interationLimitTransform.position;
-
-            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-            RaycastHit hit;
-            Vector3 rayDirection = interationLimitTransform.position - headTransform.position;
-            if(Physics.Raycast(ray, out hit, rayDirection.magnitude) && hit.transform.tag == "Interactable") {
-                if(hit.transform != pickedObject.transform) {
-                    pickedObject = null;
-                }
-            }
+            MovePickedObject();
         }
 
         if(Input.GetKeyDown(KeyCode.E)) {
             if(pickedObject != null) {
-                pickedObject.GetComponent<Rigidbody>().AddForce(pickedObjectVelocity * 100f, ForceMode.Impulse);
-                pickedObject = null;
+                DropObject();
                 return;
             }
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             RaycastHit hit;
-            Vector3 rayDirection = interationLimitTransform.position - headTransform.position;
+            Vector3 rayDirection = interactionLimitTransform.position - headTransform.position;
             if(Physics.Raycast(ray, out hit, rayDirection.magnitude) && hit.transform.tag == "Interactable") {
-                hit.transform.GetComponent<Interactable>().OnInteract();    
+                hit.transform.GetComponentInParent<Interactable>().OnInteract();
             }
         }
+    }
 
+    public void PickupObject(Rigidbody pickable) {
 
+        pickable.useGravity = false;
+        pickable.drag = 10f;
+        pickable.constraints = RigidbodyConstraints.FreezeRotation;
 
+        //pickable.transform.parent = interactionLimitTransform;
+
+        pickedObject = pickable;
+    }
+
+    public void DropObject() {
+        pickedObject.useGravity = true;
+        pickedObject.drag = 1f;
+        pickedObject.constraints = RigidbodyConstraints.None;
+
+        //pickedObject.transform.parent = null;
+        pickedObject = null;
+    }
+
+    private void MovePickedObject() {
+        if(Vector3.Distance(pickedObject.transform.position, interactionLimitTransform.position) > 0.1f) {
+            Vector3 moveDirection = interactionLimitTransform.position - pickedObject.transform.position;
+            pickedObject.AddForce(moveDirection * pickupForce);
+        }
     }
 }
