@@ -12,6 +12,9 @@ public class Button : Interactable, Signal
     private bool _isPressed = false;
     private float deactivationTime;
 
+    [SerializeField]
+    private AudioSource _audioSource;
+
     public bool Activated { 
         get => _isPressed; 
     }
@@ -28,6 +31,7 @@ public class Button : Interactable, Signal
     {
         _isPressed = true;
         deactivationTime = Time.time + activationDuration;
+        _audioSource.Play();
         if (animator != null)
         {
             animator.SetTrigger("Button");

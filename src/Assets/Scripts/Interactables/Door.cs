@@ -15,6 +15,10 @@ public class Door : Interactable
     [Header("Door Inputs")]
     public List<Transform> doorInputs;
     
+    [SerializeField]
+    private AudioSource _audioSource;
+
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -77,11 +81,13 @@ public class Door : Interactable
     {
         isOpen = true;
         animator.SetBool("Open", true);
+        _audioSource.Play();
     }
 
     public void CloseDoor()
     {
         isOpen = false;
         animator.SetBool("Open", false);
+        _audioSource.Play();
     }
 }
