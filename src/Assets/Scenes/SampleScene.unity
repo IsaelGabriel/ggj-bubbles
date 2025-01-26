@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 207533935}
   - component: {fileID: 207533934}
   - component: {fileID: 207533933}
+  - component: {fileID: 207533940}
   - component: {fileID: 207533937}
   - component: {fileID: 207533938}
   - component: {fileID: 207533939}
@@ -564,7 +565,7 @@ MonoBehaviour:
   _maxVelocity: 7
   _jumpForce: 300
   bottom: {fileID: 1858838693}
-  mouseSensitivity: 500
+  mouseSensitivity: 50
   headTransform: {fileID: 1161617838}
   headRange: {x: -90, y: 90}
   interactionLimitTransform: {fileID: 875852001}
@@ -586,8 +587,7 @@ MonoBehaviour:
     type: 3}
   _exitForce: 2
   _exit: {fileID: 1058958062}
---- !u!135 &207533940
-SphereCollider:
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -605,8 +605,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0.5}
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: -0.75, z: 0}
 --- !u!1 &254019011
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +683,7 @@ MonoBehaviour:
     meshQuery:
       layers: 33554440
       maskAndChannels: 8
-    surfaceParameter: 27294
+    surfaceParameter: 27132
     meshQueryIndex: 1
     subMeshQueryIndex: 0
     geometryHashValue: -1795812934171720949
@@ -753,7 +753,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -948,7 +948,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1 &512797202
 GameObject:
   m_ObjectHideFlags: 17
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2896,7 +2895,7 @@ Transform:
   m_GameObject: {fileID: 1058958061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5}
+  m_LocalPosition: {x: 0, y: 0, z: 2.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4602,12 +4601,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ce4ed4f0a0ab04284a0e02d88d3868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactMessage: Interact
-  stopInteractionMessage: Stop interacting
-  debugMode: 0
-  doorInputs:
-  - {fileID: 943365701}
-  - {fileID: 2052634340}
+  Version: 1
+  SharedMesh: {fileID: 680087032}
+  RenderMaterial: {fileID: 2100000, guid: aa6be5e8deef3df45b20a0691d1bb0f2, type: 2}
+  PhysicsMaterial: {fileID: 0}
+  RenderSurfaceType: 0
+  MeshDescription:
+    meshQuery:
+      layers: 16777223
+      maskAndChannels: 234881031
+    surfaceParameter: 27168
+    meshQueryIndex: 0
+    subMeshQueryIndex: 0
+    geometryHashValue: -744095485572193840
+    surfaceHashValue: -5445358379653691231
+    vertexCount: 28
+    indexCount: 54
+  HasGeneratedNormals: 0
+  HasUV2: 0
+  LightingHashValue: 0
 --- !u!43 &1790372861
 Mesh:
   m_ObjectHideFlags: 0
@@ -4911,25 +4923,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855627180}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 0, z: -6.4999995}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 781193114}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1855627182
+  m_GameObject: {fileID: 1815633735}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &1815633737
 MonoBehaviour:
-  m_ObjectHideFlags: 16
+  m_ObjectHideFlags: 17
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855627180}
+  m_GameObject: {fileID: 1815633735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 218a3c5228e87b54f8102630bb1bfc1d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8672dcc90e16b0a489a41edf56e016f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabBehaviour: 0
