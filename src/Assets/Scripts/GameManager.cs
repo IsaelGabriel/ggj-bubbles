@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,5 +28,16 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(instance.levelManagerProfile.levels[instance.currentLevel].sceneName);
         }
 
+    }
+    
+    public static void ResetLevel() {
+        if(Input.GetKeyUp(KeyCode.R)) {
+            SceneManager.LoadScene(instance.levelManagerProfile.levels[instance.currentLevel].sceneName);
+        }
+    }
+
+    private void Update()
+    {
+        ResetLevel();
     }
 }
